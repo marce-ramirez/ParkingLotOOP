@@ -1,28 +1,32 @@
 package oop.parking;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Parking {
 
     private int availableSpace;
-    private Map<String, Integer> parkingMap;
+    private Set<String> parkingCollection;
 
     public Parking(final int availableSpace) {
         this.availableSpace = availableSpace;
-        this.parkingMap = new HashMap<>();
+        this.parkingCollection = new HashSet<>();
     }
 
     public boolean add(final String licensePlate) {
-        if (isFullParking()) {
+        if(!isParkable(licensePlate)) {
             return false;
-        } else {
-            return addVehicle(licensePlate);
-        }
+        } else return addVehicle(licensePlate);
+    }
+
+    private boolean isParkable(final String licensePlate) {
+        return !isFullParking() && !isPresent(licensePlate);
     }
 
     private boolean addVehicle(final String licensePlate) {
-        parkingMap.put(licensePlate, 1);
+        parkingCollection.add(licensePlate);
         availableSpace--;
         return true;
     }
@@ -39,13 +43,13 @@ public class Parking {
         if (!isPresent(licensePlate)) {
             return false;
         } else {
-          parkingMap.put(licensePlate, 0);
-          availableSpace++;
-          return true;
+            parkingCollection.remove(licensePlate);
+            availableSpace++;
+            return true;
         }
     }
 
     public boolean isPresent(String licensePlate) {
-      return parkingMap.get(licensePlate) != null;
+        return parkingCollection.contains(licensePlate);
     }
 }

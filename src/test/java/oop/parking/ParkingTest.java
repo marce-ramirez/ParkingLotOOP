@@ -23,6 +23,13 @@ public class ParkingTest {
   }
 
   @Test
+  public void itShouldNotAllowDuplicateVehicles() {
+    final var parking = new Parking(5);
+    assertTrue(parking.add("MAT-001"));
+    assertFalse(parking.add("MAT-001"));
+  }
+
+  @Test
   public void itShouldAllowCarRetrieval() {
     final var parking = new Parking(5);
     assertFalse(parking.retrieveVehicle("MAT-001"));
