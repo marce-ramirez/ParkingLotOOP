@@ -1,8 +1,6 @@
 package oop.parking;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class Parking {
@@ -16,7 +14,7 @@ public class Parking {
     }
 
     public boolean add(final String licensePlate) {
-        if(!isParkable(licensePlate)) {
+        if (!isParkable(licensePlate)) {
             return false;
         } else return addVehicle(licensePlate);
     }
