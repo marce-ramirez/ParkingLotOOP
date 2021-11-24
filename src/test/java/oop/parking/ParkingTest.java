@@ -28,6 +28,6 @@ public class ParkingTest {
       assertTrue(parking.add("MAT-001"));
       assertTrue(parking.isPresent("MAT-001"));
       assertTrue(parking.retrieveVehicle("MAT-001"));
-      assertFalse(parking.retrieveVehicle("MAT-001"));
+      assertFalse(parking.isPresent("MAT-001"));
   }
 }
