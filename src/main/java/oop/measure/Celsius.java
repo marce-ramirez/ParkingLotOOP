@@ -1,6 +1,6 @@
 package oop.measure;
 
-public class Celsius extends Unit {
+public class Celsius extends Unit implements Temperature {
 
     public Celsius(final double value) {
         super(value);
@@ -12,9 +12,19 @@ public class Celsius extends Unit {
     }
 
     @Override
-    public double to(UnitType unitType) {
-        throw new UnsupportedOperationException("Forbidden operation");
+    public void increase(int amount) {
+
     }
+
+    @Override
+    public Temperature to(UnitType unitType) {
+        return null;
+    }
+
+//    @Override
+//    public Temperature to(UnitType unitType) {
+//        throw new UnsupportedOperationException("Forbidden operation");
+//    }
 
     @Override
     public String toString() {

@@ -8,7 +8,7 @@ public abstract class Unit {
         this.value = value;
     }
 
-    public abstract double to(UnitType unitType);
+//    public abstract double to(UnitType unitType);
 
     public abstract Unit add(Unit unitOther);
 }
