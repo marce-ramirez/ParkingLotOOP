@@ -94,14 +94,5 @@ public class MeasureConverterTest {
 
     //“I want to compare celsius with fahrenheit, like 80 fh = 26.6667 c”
     //(0°C × 9/5) + 32 = 32°F
-
-    @Test
-    public void itShouldIncreaseTemperature() {
-        Temperature temperature = new Celsius(10);
-        Temperature expectedTemperature = new Celsius(15);
-        temperature.increase(5);
-
-        assertEquals(expectedTemperature, temperature);
-    }
 }
 
