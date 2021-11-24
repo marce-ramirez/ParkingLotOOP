@@ -20,7 +20,7 @@ public class AssistantTest {
 
     @Before
     public void setUp() {
-        this.parking = new Parking(5);
+        this.parking = new Parking(1);
         this.parkingOther = new Parking(10);
         this.parkingList = new ArrayList<>();
         this.parkingList.add(parking);
