@@ -1,18 +1,30 @@
 package oop.parking;
 
+import java.util.List;
+
 public class Assistant {
 
-    private Parking parking;
+    private List<Parking> parkingList;
 
-    public Assistant(Parking parking) {
-        this.parking = parking;
+    public Assistant(final List<Parking> parkingList) {
+        this.parkingList = parkingList;
     }
 
     public boolean parkVehicle(String licensePlate) {
-        return parking.add(licensePlate);
+        boolean success = false;
+        for (Parking parking: parkingList) {
+            success = parking.add(licensePlate);
+        }
+        return success;
     }
 
     public boolean retrieveVehicle(String licensePlate) {
-        return parking.retrieveVehicle(licensePlate);
+        boolean success = false;
+        for (Parking parking: parkingList) {
+            if(parking.isPresent(licensePlate)) {
+                success = parking.retrieveVehicle(licensePlate);
+            }
+        }
+        return success;
     }
 }
