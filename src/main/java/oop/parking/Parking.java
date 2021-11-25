@@ -60,10 +60,6 @@ public class Parking {
         return slots.contains(licensePlate);
     }
 
-    public boolean isOccupiedAt80Percentage() {
-        return (double) slots.size() / this.getAvailableSpace() > 0.8;
-    }
-
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
         support.addPropertyChangeListener(pcl);
     }

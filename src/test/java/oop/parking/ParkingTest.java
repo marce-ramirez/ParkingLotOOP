@@ -39,20 +39,4 @@ public class ParkingTest {
         assertTrue(parking.isPresent(LICENSE_PLATE));
         assertTrue(parking.retrieveVehicle(LICENSE_PLATE));
     }
-
-    @Test
-    public void itShouldNotifyIfUsageBiggerThan80Percent() {
-        final var parking = new Parking(5);
-        parking.add("M-1");
-        parking.add("M-2");
-        parking.add("M-3");
-        parking.add("M-4");
-        assertTrue(parking.isOccupiedAt80Percentage());
-    }
-
-    @Test
-    public void itShouldNotifyFalseIfUsageIs0() {
-        final var parking = new Parking(0);
-        assertFalse(parking.isOccupiedAt80Percentage());
-    }
 }
