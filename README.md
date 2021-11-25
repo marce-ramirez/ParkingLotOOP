@@ -11,3 +11,8 @@ There are multiple ways you can do it. If you wanna run all tests at once from t
 You can do the same on IntelliJ. Open up the `Project` tab (Command+1) > right click the `src/test/java` folder > `Run 'All Tests'`.
 
 Or you can just right click an individual test class and then `Run` it.
+
+# TODO List
+
+1) The assistant cannot park if parking is occupied > 80%
+2) The owner wants to be notified if a parking is used > 75%.
