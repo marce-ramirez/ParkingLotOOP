@@ -8,11 +8,13 @@ import java.util.Set;
 public class Parking {
 
     private int availableSpace;
+    private final int maxCapacity;
     private Set<String> slots;
     private PropertyChangeSupport support;
 
     public Parking(final int availableSpace) {
         support = new PropertyChangeSupport(this);
+        this.maxCapacity = availableSpace;
         this.availableSpace = availableSpace;
         this.slots = new HashSet<>();
     }
@@ -28,15 +30,11 @@ public class Parking {
     }
 
     private boolean addVehicle(final String licensePlate) {
-        double previousOcupacyPercentage = 0;
-        double ocupacyPercentage = 0;
-        if(slots.size() != 0) {
-            previousOcupacyPercentage = availableSpace / slots.size();
-        }
+        final var eventPrevious = new ParkingCapacityChangeEvent(maxCapacity, availableSpace);
         slots.add(licensePlate);
         availableSpace--;
-        ocupacyPercentage = availableSpace / slots.size();
-        support.firePropertyChange("ocupacyPercentage", previousOcupacyPercentage, ocupacyPercentage);
+        final var eventAfter = new ParkingCapacityChangeEvent(maxCapacity, availableSpace);
+        support.firePropertyChange("parkingCapacityChangeEvent", eventPrevious, eventAfter);
         return true;
     }
 

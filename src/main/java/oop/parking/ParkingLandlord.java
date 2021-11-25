@@ -6,19 +6,24 @@ import java.beans.PropertyChangeListener;
 public class ParkingLandlord implements PropertyChangeListener {
 
     private boolean isPurchaseNeeded;
+    private boolean toBeClosed;
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("There are more vehicles in the parking!!!");
-        final var parking = (Parking) evt.getSource();
-        evaluateStatus(parking);
-        //this.setOcupacyPercentage((double) evt.getNewValue());
+        final var parkingCapacityChangeEvent = (ParkingCapacityChangeEvent) evt.getNewValue();
+        evaluateStatus(parkingCapacityChangeEvent);
     }
 
-    private void evaluateStatus(Parking parking) {
-        if(parking.isOccupiedAt80Percentage()) {
+    private void evaluateStatus(ParkingCapacityChangeEvent parkingCapacityChangeEvent) {
+        if(parkingCapacityChangeEvent.getPercentageOfOccupancy() >= 80) {
             System.out.println("This parking is nearly full, I need to buy a new one!");
             isPurchaseNeeded=true;
+        }
+        if (parkingCapacityChangeEvent.getPercentageOfOccupancy() < 20) {
+            this.toBeClosed = true;
+        } else {
+            this.toBeClosed = false;
         }
     }
 
@@ -26,4 +31,7 @@ public class ParkingLandlord implements PropertyChangeListener {
         return isPurchaseNeeded;
     }
 
+    public boolean isToBeClosed() {
+        return toBeClosed;
+    }
 }

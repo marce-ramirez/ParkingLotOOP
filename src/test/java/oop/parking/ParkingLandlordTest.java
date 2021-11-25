@@ -33,6 +33,37 @@ public class ParkingLandlordTest {
         parking.addPropertyChangeListener(parkingLandlord);
         parking.add("M1");
         assertFalse(parkingLandlord.isPurchaseNeeded());
+    }
 
+    @Test
+    public void itShouldCloseParkingIfUsageLessThan20Percent() {
+        final var parking = new Parking(6);
+        final var parkingLandlord = new ParkingLandlord();
+        parking.addPropertyChangeListener(parkingLandlord);
+
+        parking.add("M1");
+        assertTrue(parkingLandlord.isToBeClosed());
+    }
+
+    @Test
+    public void itShouldNotCloseParkingIfUsageGreaterThan20Percent() {
+        final var parking = new Parking(3);
+        final var parkingLandlord = new ParkingLandlord();
+        parking.addPropertyChangeListener(parkingLandlord);
+
+        parking.add("M1");
+        assertFalse(parkingLandlord.isToBeClosed());
+    }
+
+    @Test
+    public void itShouldReopenIfUsageIncreases20Percent() {
+        final var parking = new Parking(6);
+        final var parkingLandlord = new ParkingLandlord();
+        parking.addPropertyChangeListener(parkingLandlord);
+
+        parking.add("M1");
+        assertTrue(parkingLandlord.isToBeClosed());
+        parking.add("M2");
+        assertFalse(parkingLandlord.isToBeClosed());
     }
 }
