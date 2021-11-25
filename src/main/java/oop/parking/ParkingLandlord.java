@@ -5,20 +5,25 @@ import java.beans.PropertyChangeListener;
 
 public class ParkingLandlord implements PropertyChangeListener {
 
-    private double ocupacyPercentage;
+    private boolean isPurchaseNeeded;
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("There are more vehicles in the parking!!!");
-        this.setOcupacyPercentage((double) evt.getNewValue());
-        System.out.println("ocupacyPercentage: " + this.getOcupacyPercentage());
+        final var parking = (Parking) evt.getSource();
+        evaluateStatus(parking);
+        //this.setOcupacyPercentage((double) evt.getNewValue());
     }
 
-    public double getOcupacyPercentage() {
-        return ocupacyPercentage;
+    private void evaluateStatus(Parking parking) {
+        if(parking.isOccupiedAt80Percentage()) {
+            System.out.println("This parking is nearly full, I need to buy a new one!");
+            isPurchaseNeeded=true;
+        }
     }
 
-    public void setOcupacyPercentage(double ocupacyPercentage) {
-        this.ocupacyPercentage = ocupacyPercentage;
+    public boolean isPurchaseNeeded() {
+        return isPurchaseNeeded;
     }
+
 }

@@ -2,12 +2,13 @@ package oop.parking;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ParkingLandlordTest {
 
     @Test
-    public void itShouldReceiveNotificationWhenParkingUsedMoreThan75Percent() {
+    public void itShouldReceiveNotificationWhenParkingUsedMoreThan80Percent() {
         Parking parking = new Parking(10);
         ParkingLandlord parkingLandlord = new ParkingLandlord();
 
@@ -21,6 +22,17 @@ public class ParkingLandlordTest {
         parking.add("M7");
         parking.add("M8");
 
-        assertEquals(0.8, parkingLandlord.getOcupacyPercentage(), 0.01);
+        assertTrue(parkingLandlord.isPurchaseNeeded());
+    }
+
+    @Test
+    public void itShouldNotReceiveNotificationWhenParkingUsedMoreThan80Percent() {
+        Parking parking = new Parking(10);
+        ParkingLandlord parkingLandlord = new ParkingLandlord();
+
+        parking.addPropertyChangeListener(parkingLandlord);
+        parking.add("M1");
+        assertFalse(parkingLandlord.isPurchaseNeeded());
+
     }
 }
