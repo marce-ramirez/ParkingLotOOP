@@ -30,13 +30,16 @@ public class AssistantTest {
 
     @Test
     public void itShouldParkVehicleInFirstParkingWithSpace() {
+        final var parkingFull = new Parking(0);
+        final var parkingAvailable = new Parking(2);
+        final var parkingList = List.of(parkingFull, parkingAvailable);
+        final var assistant = new Assistant(parkingList);
         assertTrue(assistant.parkVehicle(LICENSE_PLATE));
-        assertFalse(assistant.parkVehicle(LICENSE_PLATE));
     }
 
     @Test
     public void itShouldRetrieveVehicle() {
-        assertTrue(assistant.parkVehicle(LICENSE_PLATE));
+        assistant.parkVehicle(LICENSE_PLATE);
         assertTrue(assistant.retrieveVehicle(LICENSE_PLATE));
         assertFalse(assistant.retrieveVehicle(LICENSE_PLATE));
     }
