@@ -15,3 +15,11 @@ Or you can just right click an individual test class and then `Run` it.
 # TODO List
 
 1) The owner wants to be notified if a parking is used > 75%.
+
+2) I can close the parking lot when it has less than 20% usage
+
+3) One lot reopen when all other lots they own and are open have usage more than 75%
+
+4) If I own only one lot, don't close
+
+5) assistant can only park on open lots
