@@ -21,3 +21,5 @@ Or you can just right click an individual test class and then `Run` it.
 3) If I own only one lot, don't close
 
 4) assistant can only park on open lots
+
+5) assistant park large cars in the parking lot with the least % of usage
