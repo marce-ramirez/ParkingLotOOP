@@ -1,13 +1,22 @@
 package oop.parking;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Assistant {
+public class Assistant implements PropertyChangeListener {
 
     private List<Parking> parkingList;
+    private Map<Parking, Double> parkingCapacities = new HashMap<>();
 
     public Assistant(final List<Parking> parkingList) {
         this.parkingList = parkingList;
+
+        for (Parking parking : parkingList) {
+            parkingCapacities.put(parking, 0.0);
+        }
     }
 
     public boolean parkVehicle(final String licensePlate) {
@@ -28,5 +37,16 @@ public class Assistant {
             }
         }
         return success;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final var parkingCapacityChangeEvent = (ParkingCapacityChangeEvent) evt.getNewValue();
+        final var parking = (Parking) evt.getSource();
+        this.parkingCapacities.put(parking, parkingCapacityChangeEvent.getPercentageOfOccupancy());
+    }
+
+    public double getCapacity(final Parking parking) {
+        return this.parkingCapacities.get(parking);
     }
 }
