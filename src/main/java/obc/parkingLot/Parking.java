@@ -2,13 +2,16 @@ package obc.parkingLot;
 
 import com.google.common.base.Objects;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Parking {
 
     private int spots;
     private Set<String> cars;
+    private List<Observer> observers = new ArrayList<Observer>();
 
     public Parking(int spots) {
         this.spots = spots;
@@ -26,6 +29,7 @@ public class Parking {
     public boolean park(Car car) {
         if (!cars.contains(car.plate) && canPark()) {
             cars.add(car.plate);
+            notifyObservers();
             return true;
         }
         return false;
@@ -41,6 +45,15 @@ public class Parking {
 
     public int getAvailableSpots() {
         return spots - cars.size();
+    }
+
+    private void notifyObservers(){
+        for (Observer observer : observers) {
+            observer.update(spots, cars.size());
+        }
+    }
+    public void addObserver(Observer observer){
+        observers.add(observer);
     }
 
     @Override
