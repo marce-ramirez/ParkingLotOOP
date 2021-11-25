@@ -5,15 +5,13 @@ import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Assistant implements PropertyChangeListener {
 
-    private List<Parking> parkingList;
     private Map<Parking, Double> parkingOccupancies = new HashMap<>();
 
     public Assistant(final List<Parking> parkingList) {
-        this.parkingList = parkingList;
-
         for (Parking parking : parkingList) {
             parkingOccupancies.put(parking, 0.0);
         }
@@ -21,6 +19,7 @@ public class Assistant implements PropertyChangeListener {
 
     public boolean parkVehicle(final String licensePlate) {
         boolean success = false;
+        final var parkingList = parkingOccupancies.keySet().stream().collect(Collectors.toList());
         int i = 0;
         while (!success && i < parkingList.size() && isOccupiedAt80Percent(i)) {
             success = parkingList.get(i).add(licensePlate);
@@ -30,11 +29,13 @@ public class Assistant implements PropertyChangeListener {
     }
 
     private boolean isOccupiedAt80Percent(int i) {
+        final var parkingList = parkingOccupancies.keySet().stream().collect(Collectors.toList());
         final var occupancy = this.parkingOccupancies.get(parkingList.get(i));
         return occupancy < 80;
     }
 
     public boolean retrieveVehicle(final String licensePlate) {
+        final var parkingList = parkingOccupancies.keySet().stream().collect(Collectors.toList());
         boolean success = false;
         for (Parking parking : parkingList) {
             if (parking.isPresent(licensePlate)) {
