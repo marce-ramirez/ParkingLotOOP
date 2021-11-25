@@ -9,9 +9,10 @@ public class Assistant {
     public Assistant(List<Parking> parkings) {
         this.parkings = parkings;
     }
+    private static double CAPACITY_RESTRICTION = 0.8;
 
     public boolean park(Car myCar) {
-        Optional<Parking> parking = parkings.stream().filter(Parking::canPark).findFirst();
+        Optional<Parking> parking = parkings.stream().filter(p -> p.canPark(CAPACITY_RESTRICTION)).findFirst();
 
         return parking.isPresent() && parking.get().park(myCar);
     }

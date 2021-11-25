@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class AssistantTest {
 
@@ -46,6 +47,24 @@ public class AssistantTest {
 
         Assistant assistant = new Assistant(Arrays.asList(parking1,parking2));
         assertEquals(false, assistant.park(myCar));
+    }
+
+    @Test
+    public void shouldNotParkWhenCapacityRestrictionIsFull(){
+        Parking parking = new Parking(10);
+        Assistant assistant = new Assistant(Arrays.asList(parking));
+
+        assistant.park(new Car("1"));
+        assistant.park(new Car("2"));
+        assistant.park(new Car("3"));
+        assistant.park(new Car("4"));
+        assistant.park(new Car("5"));
+        assistant.park(new Car("6"));
+        assistant.park(new Car("7"));
+        assistant.park(new Car("8"));
+
+        assertFalse(assistant.park(new Car("9")));
+
     }
 
 }

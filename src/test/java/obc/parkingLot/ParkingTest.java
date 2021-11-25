@@ -62,7 +62,6 @@ public class ParkingTest {
     @Test
     public void shouldReturnFalseWhenCapacityIsMoreThan80Percent(){
         Parking parking = new Parking(10);
-        String myPlate = "abc";
 
         parking.park(new Car("CAB-120"));
         parking.park(new Car("CAB-121"));
@@ -73,6 +72,20 @@ public class ParkingTest {
         parking.park(new Car("CAB-126"));
         assertTrue(parking.park(new Car("CAB-127")));
 
-        assertFalse(parking.park(new Car(myPlate)));
+        assertTrue(parking.canPark());
+        assertFalse(parking.canPark(.8));
+    }
+
+    @Test
+    public void shouldNotifyOwnerWhenCapacityIs75(){
+        Parking parking = new Parking(5);
+        parking.park(new Car("CAB-120"));
+        parking.park(new Car("CAB-121"));
+        parking.park(new Car("CAB-122"));
+        parking.park(new Car("CAB-123"));
+        parking.park(new Car("CAB-124"));
+
+        verify(parking, times(1)).notifyOwner();
+
     }
 }

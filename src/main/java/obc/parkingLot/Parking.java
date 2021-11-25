@@ -8,7 +8,6 @@ import java.util.Set;
 public class Parking {
 
     private int spots;
-    private static final double MAX_CAPACITY_ALLOWED = 0.8;
     private Set<String> cars;
 
     public Parking(int spots) {
@@ -17,7 +16,11 @@ public class Parking {
     }
 
     public boolean canPark() {
-        return cars.size() < spots * MAX_CAPACITY_ALLOWED;
+        return cars.size() < spots;
+    }
+
+    public boolean canPark(double restriction) {
+        return cars.size() < spots * restriction;
     }
 
     public boolean park(Car car) {
