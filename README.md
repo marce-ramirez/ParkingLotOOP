@@ -14,5 +14,4 @@ Or you can just right click an individual test class and then `Run` it.
 
 # TODO List
 
-1) The assistant cannot park if parking is occupied > 80%
-2) The owner wants to be notified if a parking is used > 75%.
+1) The owner wants to be notified if a parking is used > 75%.

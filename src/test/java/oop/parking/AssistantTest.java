@@ -43,4 +43,15 @@ public class AssistantTest {
         assertTrue(assistant.retrieveVehicle(LICENSE_PLATE));
         assertFalse(assistant.retrieveVehicle(LICENSE_PLATE));
     }
+
+    @Test
+    public void itShouldNotParkIfParkingUsageBiggerThan80Percent() {
+        final var parking = new Parking(5);
+        final var assistant = new Assistant(List.of(parking));
+        assistant.parkVehicle("M-1");
+        assistant.parkVehicle("M-2");
+        assistant.parkVehicle("M-3");
+        assistant.parkVehicle("M-4");
+        assertFalse(assistant.parkVehicle("M-5"));
+    }
 }

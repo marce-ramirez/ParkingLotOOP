@@ -10,17 +10,17 @@ public class Assistant {
         this.parkingList = parkingList;
     }
 
-    public boolean parkVehicle(String licensePlate) {
+    public boolean parkVehicle(final String licensePlate) {
         boolean success = false;
         int i = 0;
-        while (!success && i < parkingList.size()) {
+        while (!success && i < parkingList.size() && !parkingList.get(i).isOccupiedAt80Percentage()) {
             success = parkingList.get(i).add(licensePlate);
             i++;
         }
         return success;
     }
 
-    public boolean retrieveVehicle(String licensePlate) {
+    public boolean retrieveVehicle(final String licensePlate) {
         boolean success = false;
         for (Parking parking : parkingList) {
             if (parking.isPresent(licensePlate)) {
