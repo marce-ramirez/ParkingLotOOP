@@ -75,17 +75,4 @@ public class ParkingTest {
         assertTrue(parking.canPark());
         assertFalse(parking.canPark(.8));
     }
-
-    @Test
-    public void shouldNotifyOwnerWhenCapacityIs75(){
-        Parking parking = new Parking(5);
-        parking.park(new Car("CAB-120"));
-        parking.park(new Car("CAB-121"));
-        parking.park(new Car("CAB-122"));
-        parking.park(new Car("CAB-123"));
-        parking.park(new Car("CAB-124"));
-
-        verify(parking, times(1)).notifyOwner();
-
-    }
 }
