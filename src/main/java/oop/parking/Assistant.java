@@ -9,24 +9,29 @@ import java.util.Map;
 public class Assistant implements PropertyChangeListener {
 
     private List<Parking> parkingList;
-    private Map<Parking, Double> parkingCapacities = new HashMap<>();
+    private Map<Parking, Double> parkingOccupancies = new HashMap<>();
 
     public Assistant(final List<Parking> parkingList) {
         this.parkingList = parkingList;
 
         for (Parking parking : parkingList) {
-            parkingCapacities.put(parking, 0.0);
+            parkingOccupancies.put(parking, 0.0);
         }
     }
 
     public boolean parkVehicle(final String licensePlate) {
         boolean success = false;
         int i = 0;
-        while (!success && i < parkingList.size() && !parkingList.get(i).isOccupiedAt80Percentage()) {
+        while (!success && i < parkingList.size() && isOccupiedAt80Percent(i)) {
             success = parkingList.get(i).add(licensePlate);
             i++;
         }
         return success;
+    }
+
+    private boolean isOccupiedAt80Percent(int i) {
+        final var occupancy = this.parkingOccupancies.get(parkingList.get(i));
+        return occupancy < 80;
     }
 
     public boolean retrieveVehicle(final String licensePlate) {
@@ -43,10 +48,10 @@ public class Assistant implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         final var parkingCapacityChangeEvent = (ParkingCapacityChangeEvent) evt.getNewValue();
         final var parking = (Parking) evt.getSource();
-        this.parkingCapacities.put(parking, parkingCapacityChangeEvent.getPercentageOfOccupancy());
+        this.parkingOccupancies.put(parking, parkingCapacityChangeEvent.getPercentageOfOccupancy());
     }
 
     public double getCapacity(final Parking parking) {
-        return this.parkingCapacities.get(parking);
+        return this.parkingOccupancies.get(parking);
     }
 }

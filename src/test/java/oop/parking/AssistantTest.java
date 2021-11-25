@@ -49,7 +49,8 @@ public class AssistantTest {
     public void itShouldNotParkIfParkingUsageBiggerThan80Percent() {
         final var parking = new Parking(5);
         final var assistant = new Assistant(List.of(parking));
-        assistant.parkVehicle(LICENSE_PLATE_TEST);
+        parking.addPropertyChangeListener(assistant);
+        assistant.parkVehicle("M-1");
         assistant.parkVehicle("M-2");
         assistant.parkVehicle("M-3");
         assistant.parkVehicle("M-4");
