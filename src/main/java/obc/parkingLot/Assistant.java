@@ -16,9 +16,14 @@ public class Assistant {
         return parking.isPresent() && parking.get().park(myCar);
     }
 
-    public void retrieve(String plate) {
+    public Car retrieve(String plate) {
+        Optional<Parking> parking = parkings.stream().filter(p -> p.containsCar(plate)).findFirst();
 
-        return;
+        if (parking.isPresent()){
+            return parking.get().retrieveCar(plate);
+        }
+
+        throw new UnsupportedOperationException();
     }
 
     @Override

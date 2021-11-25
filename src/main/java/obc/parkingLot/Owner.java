@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Owner implements Observer{
-    public boolean hasBeenNotified = false;
+    public String notificationRecieved = "";
     private final List<Parking> parkings = new ArrayList<Parking>();
     private Assistant assistant;
 
@@ -24,7 +24,10 @@ public class Owner implements Observer{
     public void update(int totalPlaces, int usedPlaces) {
         double percentageUsed = usedPlaces * 100 / totalPlaces;
         if (percentageUsed >= 75){
-            hasBeenNotified = true;
+            notificationRecieved = "Max capacity reached";
+        }
+        if (percentageUsed <= 20){
+            notificationRecieved = "Close parking";
         }
 
     }

@@ -66,5 +66,23 @@ public class AssistantTest {
         assertFalse(assistant.park(new Car("9")));
 
     }
+    @Test
+    public void shouldRetrieveCar(){
+        Parking parking = new Parking(4);
+        Assistant assistant = new Assistant(Arrays.asList(parking));
+
+        String myPlate = "ABC12";
+        Car myCar = new Car(myPlate);
+        assistant.park(myCar);
+
+        assertEquals(myCar, assistant.retrieve(myPlate));
+    }
+    @Test(expected = UnsupportedOperationException.class)
+    public void shouldThrowAnExceptionWhenRetrievingNotExistingCar(){
+        Parking parking = new Parking(4);
+        Assistant assistant = new Assistant(Arrays.asList(parking));
+        String myPlate = "abc";
+        assistant.retrieve(myPlate);
+    }
 
 }

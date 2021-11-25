@@ -38,7 +38,7 @@ public class OwnerTest{
         newAssistant.park(new Car("CAB-122"));
         newAssistant.park(new Car("CAB-123"));
 
-        assertTrue(newOwner.hasBeenNotified);
+        assertEquals(newOwner.notificationRecieved, "Max capacity reached");
 
     }
     @Test
@@ -50,7 +50,7 @@ public class OwnerTest{
         newAssistant.park(new Car("CAB-121"));
         newAssistant.retrieve("CAB-121");
 
-        assertTrue(newOwner.hasBeenNotified);
+        assertEquals(newOwner.notificationRecieved, "Close parking");
 
     }
 

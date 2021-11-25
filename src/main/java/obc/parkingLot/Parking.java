@@ -26,6 +26,10 @@ public class Parking {
         return cars.size() < spots * restriction;
     }
 
+    public boolean containsCar(String plate){
+        return cars.contains(plate);
+    }
+
     public boolean park(Car car) {
         if (!cars.contains(car.plate) && canPark()) {
             cars.add(car.plate);
@@ -38,6 +42,7 @@ public class Parking {
     public Car retrieveCar(String myPlate) {
         if (cars.contains(myPlate)) {
             cars.remove(myPlate);
+            notifyObservers();
             return new Car(myPlate);
         }
         throw new UnsupportedOperationException();
@@ -47,13 +52,14 @@ public class Parking {
         return spots - cars.size();
     }
 
+    public void addObserver(Observer observer){
+        observers.add(observer);
+    }
+
     private void notifyObservers(){
         for (Observer observer : observers) {
             observer.update(spots, cars.size());
         }
-    }
-    public void addObserver(Observer observer){
-        observers.add(observer);
     }
 
     @Override
