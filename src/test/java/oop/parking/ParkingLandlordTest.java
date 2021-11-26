@@ -1,9 +1,9 @@
 package oop.parking;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 public class ParkingLandlordTest {
 
@@ -13,14 +13,14 @@ public class ParkingLandlordTest {
         ParkingLandlord parkingLandlord = new ParkingLandlord();
 
         parking.addPropertyChangeListener(parkingLandlord);
-        parking.add("M1");
-        parking.add("M2");
-        parking.add("M3");
-        parking.add("M4");
-        parking.add("M5");
-        parking.add("M6");
-        parking.add("M7");
-        parking.add("M8");
+        parking.addVehicle(new Car("M-1", false));
+        parking.addVehicle(new Car("M-2", false));
+        parking.addVehicle(new Car("M-3", false));
+        parking.addVehicle(new Car("M-4", false));
+        parking.addVehicle(new Car("M-5", false));
+        parking.addVehicle(new Car("M-6", false));
+        parking.addVehicle(new Car("M-7", false));
+        parking.addVehicle(new Car("M-8", false));
 
         assertTrue(parkingLandlord.isPurchaseNeeded());
     }
@@ -31,7 +31,7 @@ public class ParkingLandlordTest {
         ParkingLandlord parkingLandlord = new ParkingLandlord();
 
         parking.addPropertyChangeListener(parkingLandlord);
-        parking.add("M1");
+        parking.addVehicle(new Car("M-1", false));
         assertFalse(parkingLandlord.isPurchaseNeeded());
     }
 
@@ -41,7 +41,7 @@ public class ParkingLandlordTest {
         final var parkingLandlord = new ParkingLandlord();
         parking.addPropertyChangeListener(parkingLandlord);
 
-        parking.add("M1");
+        parking.addVehicle(new Car("M-1", false));
         assertTrue(parkingLandlord.isToBeClosed());
     }
 
@@ -51,7 +51,7 @@ public class ParkingLandlordTest {
         final var parkingLandlord = new ParkingLandlord();
         parking.addPropertyChangeListener(parkingLandlord);
 
-        parking.add("M1");
+        parking.addVehicle(new Car("M-1", false));
         assertFalse(parkingLandlord.isToBeClosed());
     }
 
@@ -61,9 +61,9 @@ public class ParkingLandlordTest {
         final var parkingLandlord = new ParkingLandlord();
         parking.addPropertyChangeListener(parkingLandlord);
 
-        parking.add("M1");
+        parking.addVehicle(new Car("M-1", false));
         assertTrue(parkingLandlord.isToBeClosed());
-        parking.add("M2");
+        parking.addVehicle(new Car("M-2", false));
         assertFalse(parkingLandlord.isToBeClosed());
     }
 }

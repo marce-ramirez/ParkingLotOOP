@@ -2,14 +2,14 @@ package oop.parking;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Assistant implements PropertyChangeListener {
 
-    private Map<Parking, Double> parkingOccupancies = new HashMap<>();
+    private Map<Parking, Double> parkingOccupancies = new LinkedHashMap<>();
 
     public Assistant(final List<Parking> parkingList) {
         for (Parking parking : parkingList) {
@@ -17,12 +17,12 @@ public class Assistant implements PropertyChangeListener {
         }
     }
 
-    public boolean parkVehicle(final String licensePlate) {
+    public boolean parkVehicle(final Car car) {
         boolean success = false;
         final var parkingList = parkingOccupancies.keySet().stream().collect(Collectors.toList());
         int i = 0;
         while (!success && i < parkingList.size() && isOccupiedAt80Percent(i)) {
-            success = parkingList.get(i).add(licensePlate);
+            success = parkingList.get(i).addVehicle(car);
             i++;
         }
         return success;
@@ -34,12 +34,12 @@ public class Assistant implements PropertyChangeListener {
         return occupancy < 80;
     }
 
-    public boolean retrieveVehicle(final String licensePlate) {
+    public boolean retrieveVehicle(final Car car) {
         final var parkingList = parkingOccupancies.keySet().stream().collect(Collectors.toList());
         boolean success = false;
         for (Parking parking : parkingList) {
-            if (parking.isPresent(licensePlate)) {
-                success = parking.retrieveVehicle(licensePlate);
+            if (parking.isPresent(car)) {
+                success = parking.retrieveVehicle(car);
             }
         }
         return success;

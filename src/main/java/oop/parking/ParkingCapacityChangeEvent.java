@@ -11,6 +11,6 @@ public class ParkingCapacityChangeEvent {
     }
 
     public double getPercentageOfOccupancy() {
-        return ((maxCapacity - currentCapacity) * 1.0 / maxCapacity) * 100;
+        return maxCapacity == 0 ? 100 : ((maxCapacity - currentCapacity) * 1.0 / maxCapacity) * 100;
     }
 }

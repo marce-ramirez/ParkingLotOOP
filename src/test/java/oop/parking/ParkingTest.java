@@ -12,31 +12,31 @@ public class ParkingTest {
 
     @Test
     public void itShouldNotAllowVehiclesIfNoAvailableSpace() {
-        assertFalse(new Parking(0).add(LICENSE_PLATE));
+        assertFalse(new Parking(0).addVehicle(new Car(LICENSE_PLATE, false)));
     }
 
     @Test
     public void itShouldAllowVehiclesIfAvailableSpace() {
         final var parking = new Parking(5);
         assertEquals(5, parking.getAvailableSpace());
-        assertTrue(parking.add(LICENSE_PLATE));
-        assertTrue(parking.isPresent(LICENSE_PLATE));
+        assertTrue(parking.addVehicle(new Car(LICENSE_PLATE, false)));
+        assertTrue(parking.isPresent(new Car(LICENSE_PLATE, false)));
         assertEquals(4, parking.getAvailableSpace());
     }
 
     @Test
     public void itShouldNotAllowDuplicateVehicles() {
         final var parking = new Parking(5);
-        assertTrue(parking.add(LICENSE_PLATE));
-        assertFalse(parking.add(LICENSE_PLATE));
+        assertTrue(parking.addVehicle(new Car(LICENSE_PLATE, false)));
+        assertFalse(parking.addVehicle(new Car(LICENSE_PLATE, false)));
     }
 
     @Test
     public void itShouldAllowCarRetrieval() {
         final var parking = new Parking(5);
-        assertFalse(parking.retrieveVehicle(LICENSE_PLATE));
-        assertTrue(parking.add(LICENSE_PLATE));
-        assertTrue(parking.isPresent(LICENSE_PLATE));
-        assertTrue(parking.retrieveVehicle(LICENSE_PLATE));
+        assertFalse(parking.retrieveVehicle(new Car(LICENSE_PLATE, false)));
+        assertTrue(parking.addVehicle(new Car(LICENSE_PLATE, false)));
+        assertTrue(parking.isPresent(new Car(LICENSE_PLATE, false)));
+        assertTrue(parking.retrieveVehicle(new Car(LICENSE_PLATE, false)));
     }
 }
